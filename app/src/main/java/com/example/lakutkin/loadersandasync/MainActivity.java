@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			return "Test";
+			return new String("Test");
 		}
 
 		@Override
