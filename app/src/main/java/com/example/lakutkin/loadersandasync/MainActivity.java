@@ -11,10 +11,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
-	private static class MyLoader extends AsyncTaskLoader<String> {
-
-		String data;
-
+	private static class MyLoader extends TrueAsyncLoader<String> {
 		public MyLoader(Context context) {
 			super(context);
 		}
@@ -26,17 +23,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			return data = new String("Test");
-		}
-
-		@Override
-		protected void onStartLoading() {
-			super.onStartLoading();
-			if (data == null) {
-				forceLoad();
-			} else {
-				deliverResult(data);
-			}
+			return "Test";
 		}
 	}
 
@@ -66,5 +53,4 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 	public void onLoaderReset(Loader<String> loader) {
 
 	}
-
 }
