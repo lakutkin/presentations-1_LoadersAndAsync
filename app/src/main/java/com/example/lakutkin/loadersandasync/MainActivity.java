@@ -13,6 +13,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 	private static class MyLoader extends AsyncTaskLoader<String> {
 
+		String data;
+
 		public MyLoader(Context context) {
 			super(context);
 		}
@@ -24,13 +26,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			return new String("Test");
+			return data = new String("Test");
 		}
 
 		@Override
 		protected void onStartLoading() {
 			super.onStartLoading();
-			forceLoad();
+			if (data == null) {
+				forceLoad();
+			} else {
+				deliverResult(data);
+			}
 		}
 	}
 
