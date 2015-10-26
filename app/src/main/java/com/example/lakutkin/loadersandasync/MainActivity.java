@@ -7,6 +7,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
@@ -19,11 +20,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 		@Override
 		public String loadInBackground() {
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			return "Test";
+		}
+
+		@Override
+		protected void onStartLoading() {
+			super.onStartLoading();
+			forceLoad();
 		}
 	}
 
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 	@Override
 	public void onLoadFinished(Loader<String> loader, String data) {
+		Log.d("Loaders", "onLoadFinished");
 		TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(data);
 	}
