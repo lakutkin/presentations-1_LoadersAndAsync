@@ -56,8 +56,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 		Log.d("Loaders", "onLoadFinished");
 		TextView textView = (TextView) findViewById(R.id.textView);
 		textView.setText(data);
-		
-		getSupportFragmentManager().beginTransaction().add(R.id.layout, new MyFragment(), "Tag").commit();
+
+		new Handler().post(new Runnable() {
+			@Override
+			public void run() {
+				getSupportFragmentManager().beginTransaction().add(R.id.layout, new MyFragment(), "Tag").commit();
+			}
+		});
 	}
 
 	@Override
